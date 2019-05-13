@@ -2,16 +2,13 @@
         const router = express.Router()
         const Client = require('../models/client')
 
-        //log in
+//------------------log in---------------------------
         router.get('/auth', (req, res, next) => {
-            // res.send('authentication')
             const email = req.body.email;
             const password = req.body.password;
 
-    //Check the user exists
-    Client.findOne({
-        email: email
-    }, (err, client) => {
+        //Check the user exists
+            Client.findOne({email: email}, (err, client) => {
         //Error during exuting the query
         if (err) {
         return res.send({
@@ -68,7 +65,7 @@
         })
 
 
-        //registration
+//--------------------registration-------------------------
         router.post('/register', (req, res, next) => {
             // res.send('I am registration')
             let newClient = new Client ({
@@ -90,4 +87,7 @@
 
         })
 
-        module.exports = router;
+//-----------------Update--------------------------------
+
+        
+module.exports = router;
