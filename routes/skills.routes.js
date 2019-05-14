@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Skill = require('../models/skill')
+const Provider = require('../models/provider')
 
 //------------Get----------
 router.get('/', (request, response)=>{
@@ -12,6 +13,23 @@ router.get('/', (request, response)=>{
     response.send({ message : err})
     })
     
+})
+//----------------find all providers have the same skill------------
+
+router.get('/:id/providers', (req, res) => {
+    Provider.find({})
+    .then(providers => {
+        let allProviders = providers.filter((provider)=> {
+            let Allskills = provider.skills.filter((skill)=> skill.toString() == req.params.id)
+            if (Allskills.length != 0){
+                return provider
+            }
+        })
+    res.status(200).json({ providers : allProviders})
+    })
+    .catch(err => {
+    res.send({ message : err})
+    }) 
 })
 //------------Post----------
 router.post('/', (request, response)=>{
@@ -34,7 +52,6 @@ router.post('/', (request, response)=>{
     })
     
 })
-
 
 
 module.exports = router;

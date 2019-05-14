@@ -6,6 +6,10 @@ const app = express()
 const expressLayout = require('express-ejs-layouts')
 const mongoose = require('mongoose')
 const cors = require('cors')
+const session = require('express-session')
+//jwt and passports
+const jwt = require('jsonwebtoken')
+const passport = require('passport')
 const clientRouter = require('./routes/clients.routes')
 const providerRouter = require('./routes/providers.routes')
 const serviceRouter = require('./routes/services.routes')
@@ -18,7 +22,8 @@ app.use(express.urlencoded({ extended : true}))//for form data
 app.use(express.json()) // receive json from req.body
 app.set('view engine', 'ejs')
 app.use(expressLayout)
-
+app.use(passport.initialize())
+app.use(passport.session())
 //-----------------DBConfig----------------------
 mongoose.connect(URL ,{
     useNewUrlParser : true,
@@ -29,10 +34,11 @@ mongoose.connect(URL ,{
 
 
 //-----------------Routes----------------------
-app.use('/api/clients',clientRouter)
-app.use('/api/providers',providerRouter)
-app.use('/api/services',serviceRouter)
-app.use('/api/skills',skillRouter)
+app.use('/api/auth', require('./routes/auth.routes'))
+app.use('/api/clients', clientRouter)
+app.use('/api/providers',passport.authenticate('jwt', {session: false}), providerRouter)
+app.use('/api/services',passport.authenticate('jwt', {session: false}), serviceRouter)
+app.use('/api/skills',passport.authenticate('jwt', {session: false}), skillRouter)
 
 //--cannot find route--
 app.use('*', (request, response) => {
