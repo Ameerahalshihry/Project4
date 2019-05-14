@@ -12,7 +12,6 @@ import Post from "./components/post";
 
 class App extends Component {
   state = {
-    user: null,
     activePage: "Home"
   };
   changeActivePage = activePage => {
@@ -27,7 +26,7 @@ class App extends Component {
     Signout();
   };
   render() {
-    const { user, activePage } = this.state;
+    const { activePage } = this.state;
     return (
       <div>
         <Nav
@@ -36,6 +35,7 @@ class App extends Component {
         />
          <div >
           {activePage === "home" ? <Home /> : ""}
+          {/* <Home /> */}
           {activePage === "sign-in" ? (
             <SigninForm onSignin={this.onSignin} />
           ) : (

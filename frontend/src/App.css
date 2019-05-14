@@ -6,9 +6,18 @@ h1 {
   margin: 10px 0 0 0;
 }
 
+#form input,   
+#form select,   
+#form textarea,   
+#form label { 
+  font-size: 15px;  
+  margin-bottom: 2px;
+  font-family: Arial, san-serif;
+}
+
 #contact-form {
   background-color:rgba(198, 202, 211, 0.377);
-  padding: 40px 40px 100px 50px;
+  padding: 30px 60px 50px 50px;
   max-width:150%;
   float: left;
   left: 57%;
@@ -79,7 +88,7 @@ h1 {
      padding-right: 3%;
   }
 }
-img {
+#hanouf {
   border-radius: 50%;
   width: 200px;
   height: 200px;
@@ -87,7 +96,8 @@ img {
 
 }
 div .profile{
-  background-color: #989299;
+  /* background-color: #989299; */
+  background-image: url("https://img3.akspic.com/preview/14368-monochrome_mode-cleaning-blue-digital_art-angle-550x344.jpg");
   text-align: center;
   margin-bottom: 0px;
 }
@@ -153,3 +163,65 @@ p{
   margin: 10%;
   margin-bottom: 0px;
   }
+ 
+     .card-img-top{
+      width: 200px;
+      height: 220px;
+        border: 2px solid black;
+        border-radius: 3px;
+         margin-left: auto;
+   margin-right: auto;
+    display: block;  
+   width: 70%;
+  
+     }
+  
+     .font{
+      float: left;
+      font-size: 20px;
+      text-align: center;
+    }
+    h5{
+        font-size: 25px;
+        }
+  
+  .app{
+  
+      width: 200px;
+      height: 220px;
+        /* border: 1px solid black; */
+        border-radius: 4px;
+        margin-left: auto;
+   margin-right: auto;
+   display: block;
+  
+  }
+  
+  
+  .center-1 {
+   
+    width: 250px;
+    height: 250px;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+  }
+  
+  .center-2 {
+    width: 250px;
+      height: 250px;
+     border-radius: 4px;
+      display: flex;
+    margin:auto auto auto 40em;
+    text-align: center;
+     justify-content: space-around; 
+      align-items: flex-start;
+  } 
+  
+
+  
+  
+  
