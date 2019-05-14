@@ -1,9 +1,15 @@
 import React, { Component } from 'react'
-//  import swal from 'sweetalert';
+ import swal from 'sweetalert';
 
 import './style.css';
 
 export default class skills extends Component {
+
+submitHandler = e => {
+  e.preventDefault()
+  swal("Hello world!")
+}
+
   render() {
     return (
         
@@ -87,11 +93,7 @@ export default class skills extends Component {
   
     <br />
     <br />
-    <button class="btn btn-primary" type="submit">Send</button>
-    {/* swal({
-  title: "Sweet!"
-
-}); */}
+    <button class="btn btn-primary" type="submit" onClick={this.submitHandler}>Send</button>
 
   </form>
 </div>

@@ -4,7 +4,7 @@ export default class home extends Component {
   render() {
     return (
       
-        <div class="app">
+        <div>
  
       
  <div className = "center-2">

@@ -7,11 +7,11 @@ import Home from './home';
 
 function App() {
   return (
-    <div className="App">
+    <div>
     Hello
      
-    <Home />
-     {/* <Skill/>  */}
+    {/* <Home /> */}
+     <Skill/> 
     </div>
   );
 }
