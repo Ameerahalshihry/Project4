@@ -7,7 +7,27 @@ require('dotenv').config()
 
     const passportHelper = require('../config/passport')
 
+//-------------------------------
 
+router.get('/', (request, response, next) => {
+    //custom jwt authenticate
+    passport.authenticate('jwt', {session: false}, (err, user, info)=>{
+        console.log("got here")
+        if(err){ return response.status(400).json({ message: err }) }
+  
+        if(info !== undefined){
+          return response.json({ message: info.message })
+        }else{
+          User.find({})
+          .then((user)=>{
+            response.json({ user: user });
+          })
+        }
+  
+    })(request, response, next)
+  
+    
+  })
  //--------------------registration-------------------------
  router.post('/register', (req, res, next) => {
     // res.send('I am registration')
@@ -25,7 +45,7 @@ require('dotenv').config()
         res.status(200).json({ message : "Registered Successfully",newClient })
     })
     .catch( err => {
-    res.status(401).json({ message : "You are not Allowed to Register", err: err})
+    res.status(201).json({ message : "You are not Allowed to Register", err: err})
     })
 
 })

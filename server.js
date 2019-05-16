@@ -14,6 +14,7 @@ const clientRouter = require('./routes/clients.routes')
 const providerRouter = require('./routes/providers.routes')
 const serviceRouter = require('./routes/services.routes')
 const skillRouter = require('./routes/skills.routes')
+const Service = require('./models/service')
 
 
 //-----------------MiddleWares----------------------
@@ -34,12 +35,75 @@ mongoose.connect(URL ,{
 
 
 //-----------------Routes----------------------
-app.use('/api/auth', require('./routes/auth.routes'))
-app.use('/api/clients', clientRouter)
-app.use('/api/providers',passport.authenticate('jwt', {session: false}), providerRouter)
-app.use('/api/services',passport.authenticate('jwt', {session: false}), serviceRouter)
-app.use('/api/skills',passport.authenticate('jwt', {session: false}), skillRouter)
+app.use('/auth', require('./routes/auth.routes'))
+app.use('/clients', clientRouter)
+app.use('/providers',passport.authenticate('jwt', {session: false}), providerRouter)
+app.use('/services', serviceRouter)
+// app.use('/services',passport.authenticate('jwt', {session: false}), serviceRouter)
+app.use('/skills', skillRouter)
 
+
+app.get('/services', (request, response)=>{
+    Service.find({})
+    .then(services => {
+    response.status(200).json({ services : services})
+    })
+    .catch(err => {
+    response.send({ message : err})
+    })
+    
+})
+
+ //------------Post new----------
+ app.post('/services', (request, response)=>{
+    let data = {
+    name : request.body.name,
+    description : request.body.description,
+    duration :request.body.duration,
+    cost:request.body.cost
+    }
+
+    let service = new Service (data)
+
+    service.save()
+    .then(()=> {
+    
+    response.status(200).json({ service : service, message: "saved"})
+    })
+    .catch(err => {
+    response.send({ message : err})
+    })
+    
+})
+
+app.get('/services/:id', (request, response)=>{
+    Service.findById(request.params.id)
+    .then(service => {
+    response.status(200).json({ service})
+    })
+    .catch(err => {
+    response.send({ message : err})
+    })
+    
+})
+
+//------------Update ----------
+app.put('/services/:id', (req, res) => {
+    //find service 5cc31a3ba5893a210fa23428"
+    let inputData = {
+        name : req.body.name,
+        description : req.body.description,
+        duration :req.body.duration,
+        cost:req.body.cost
+    }
+
+    Service.findOneAndUpdate({_id: req.params.id},{$set:inputData})
+    .then(service => {
+    res.status(200).json({...service})
+    }).catch(err => {
+    res.json({message: err })
+    })
+})
 //--cannot find route--
 app.use('*', (request, response) => {
     response.status(404).json({message : "Data not found!"})

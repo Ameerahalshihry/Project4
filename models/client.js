@@ -5,10 +5,10 @@
 
 
     const clientSchema = new Schema({
-        firstName:{ type: String, required: true},
-        lastName:{ type: String, required: true},
+        firstName:{ type: String},
+        lastName:{ type: String},
         email : { type: String, required: true, unique : true},
-        username : { type: String, required: true, unique : true},
+        username : { type: String },
         password : { type: String, required: true},
         phone:{ type: Number },
         services:[{ type: Schema.Types.ObjectId, ref : 'Service'}]

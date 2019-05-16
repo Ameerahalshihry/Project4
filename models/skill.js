@@ -6,5 +6,5 @@ const skillSchema = new Schema({
     level :{ type: Number, default: 25}
 },{timestamps : true})
 
-const Skill = mongoose.model('Skill', skillSchema)
+const Skill = mongoose.models.Skill || mongoose.model('Skill', skillSchema)
 module.exports = Skill

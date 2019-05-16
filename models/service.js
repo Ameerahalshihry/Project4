@@ -8,5 +8,5 @@ const serviceSchema = new Schema({
     cost:{ type: Number , required: true}
 },{timestamps : true})
 
-const Service = mongoose.model('Service', serviceSchema)
+const Service = mongoose.models.Service || mongoose.model('Service', serviceSchema)
 module.exports = Service
